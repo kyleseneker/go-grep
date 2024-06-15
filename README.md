@@ -2,6 +2,8 @@
 
 A simple implementation of the `grep` command in Go, supporting basic pattern matching, recursive search, case-insensitive search, and more.
 
+This project was originally created as part of a coding challenge from [codingchallenges.fyi](https://codingchallenges.fyi/challenges/challenge-grep).
+
 ## Features
 
 - Match lines in a file or directory tree using a regular expression.
