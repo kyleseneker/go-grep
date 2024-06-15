@@ -1,25 +1,22 @@
 # go-grep
 
-A simple implementation of the `grep` command in Go, supporting basic pattern matching, recursive search, case-insensitive search, and more.
+`go-grep` is a command-line tool written in Go for searching patterns in files and directories. It supports various options to customize the search behavior, similar to the UNIX `grep` command-line utility.
 
-This project was originally created as part of a coding challenge from [codingchallenges.fyi](https://codingchallenges.fyi/challenges/challenge-grep).
+This project was originally created as  part of a coding challenge from [codingchallenges.fyi](https://codingchallenges.fyi/challenges/challenge-grep).
 
 ## Features
 
-- Match lines in a file or directory tree using a regular expression.
-- Support for the following command-line options:
-  - `-r`: Recursively search directories.
-  - `-v`: Invert the match, excluding lines that match the pattern.
-  - `-i`: Case-insensitive search.
-- Special regex characters supported:
-  - `^`: Matches the start of a line.
-  - `$`: Matches the end of a line.
-  - `\d`: Matches any digit.
-  - `\w`: Matches any word character.
+- Search for a regular expression pattern in one or more files or directories.
+- Recursive search through directories (`-r`).
+- Invert the match to exclude lines that match the pattern (`-v`).
+- Ignore case distinctions in the pattern (`-i`).
+- Print only a count of matching lines per file (`-c`).
+- Prefix each line of output with the 1-based line number within its input file (`-n`).
+- Suppress normal output, useful for scripts (`-q`).
 
 ## Installation
 
-To install the `wc` tool, you need to have Golang installed on your system. Follow these steps:
+To install the `go-grep` tool, you need to have Golang installed on your system. Follow these steps:
 
 1. Clone the repository:
 
@@ -42,38 +39,17 @@ To install the `wc` tool, you need to have Golang installed on your system. Foll
 ## Usage
 
 ```sh
-Usage: ./grep-clone [-r] [-v] [-i] <pattern> <filename or directory>
+go-grep [-r] [-v] [-i] [-c] [-n] [-q] <pattern> <filename or directory>
 ```
 
-Perform a basic search:
+### Options
 
-```sh
-./go-grep "pattern" filename.txt
-```
-
-Perform a recursive search:
-
-```sh
-./go-grep -r "pattern" filename.txt
-```
-
-Invert matched pattern:
-
-```sh
-./grep-clone -v "pattern" filename.txt
-```
-
-Perform a case-insensitive search:
-
-```sh
-./go-grep -i "pattern" filename.txt
-```
-
-You can combine any of these options:
-
-```sh
-./go-grep -r -i -v "pattern" filename.txt
-```
+- `-r`, `--recursive`: Recursively search through directories.
+- `-v`, `--invert`: Invert the match to exclude matching lines.
+- `-i`,`--ignore-case`: Ignore case distinctions in the pattern.
+- `-c`, `--count`: Print only a count of matching lines per file.
+- `-n`, `--line-number`: Prefix each line of output with the 1-based line number within its input file.
+- `-q`, `--quiet`, `--silent`: Suppress normal output, useful for scripts.
 
 ### Special Regex Characters
 
@@ -81,6 +57,63 @@ You can combine any of these options:
 - `$`: Matches the end of a line.
 - `\d`: Matches any digit.
 - `\w`: Matches any word character.
+
+## Examples
+
+Perform a basic search:
+
+```sh
+$ ./go-grep J examples/rockbands.txt
+Judas Priest
+Bon Jovi
+Junkyard
+```
+
+Perform a recursive search:
+
+```sh
+$ ./go-grep -r Nirvana *
+examples/rockbands.txt:Nirvana
+examples/test-subdir/BFS1985.txt:Since Bruce Springsteen, Madonna, way before Nirvana
+examples/test-subdir/BFS1985.txt:On the radio was Springsteen, Madonna, way before Nirvana
+examples/test-subdir/BFS1985.txt:And bring back Springsteen, Madonna, way before Nirvana
+examples/test-subdir/BFS1985.txt:Bruce Springsteen, Madonna, way before Nirvana
+```
+
+Invert matched pattern:
+
+```sh
+$ ./grep-clone -r Nirvana * | grep -v Madonna
+examples/rockbands.txt:Nirvana
+```
+
+Perform a case-insensitive search:
+
+```sh
+$ ./go-grep -i A examples/rockbands.txt | wc -l
+      58
+```
+
+Perform pattern matching for searching only the beginning or end of a line:
+
+```sh
+$ ./go-grep ^A examples/rockbands.txt
+AC/DC
+Aerosmith
+Accept
+April Wine
+Autograph
+```
+
+```sh
+./go-grep na$ examples/rockbands.txt
+Nirvana
+```
+
+## Output Formatting
+
+- Matching parts of lines are highlighted in red and bold by default, similar to how grep highlights matches in terminals.
+- Output includes the file name if `-r` (recursive) option is used.
 
 ## Contributing
 
