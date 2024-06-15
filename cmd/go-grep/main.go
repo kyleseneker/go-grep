@@ -59,7 +59,7 @@ func main() {
 			// Check if enough arguments are provided
 			if c.NArg() < 2 {
 				fmt.Println("Usage: go-grep [-r] [-v] [-i] [-c] [-n] [-q] <pattern> <filename or directory>")
-				return cli.Exit("", 1)
+				return cli.Exit("", 2)
 			}
 
 			// Extract pattern and path(s) from command-line arguments
@@ -87,7 +87,7 @@ func main() {
 			// Handle regex compilation errors
 			if err != nil {
 				fmt.Fprintf(os.Stderr, "Error compiling regex pattern %s: %v\n", pattern, err)
-				return cli.Exit("", 1)
+				return cli.Exit("", 2)
 			}
 
 			matched := false
@@ -115,7 +115,7 @@ func main() {
 					// Handle errors during recursive directory traversal
 					if err != nil {
 						fmt.Fprintf(os.Stderr, "Error walking the path %s: %v\n", path, err)
-						return cli.Exit("", 1)
+						return cli.Exit("", 2)
 					}
 				} else {
 					// Perform search in a single file or directory without recursion

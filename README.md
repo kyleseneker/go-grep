@@ -115,6 +115,14 @@ Nirvana
 - Matching parts of lines are highlighted in red and bold by default, similar to how grep highlights matches in terminals.
 - Output includes the file name if `-r` (recursive) option is used.
 
+## Exit Codes
+
+The `go-grep` utility exits with one of the following values:
+
+- `0`: One or more lines were selected.
+- `1`: No lines were selected.
+- `2`: An error occurred.
+
 ## Performance
 
 [hyperfine](https://github.com/sharkdp/hyperfine) is used to perform benchmarks.
