@@ -16,6 +16,6 @@ clean:
 lint:
 	@golangci-lint run ./...
 
-benchmark:
+benchmark: build
 	@hyperfine --warmup 2 './go-grep -r "Nirvana" examples/*' 'grep -r "Nirvana" examples/*'
 	@$(MAKE) clean
