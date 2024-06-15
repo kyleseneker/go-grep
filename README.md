@@ -115,6 +115,16 @@ Nirvana
 - Matching parts of lines are highlighted in red and bold by default, similar to how grep highlights matches in terminals.
 - Output includes the file name if `-r` (recursive) option is used.
 
+## Performance
+
+[hyperfine](https://github.com/sharkdp/hyperfine) is used to perform benchmarks.
+
+To run the pre-defined benchmark:
+
+```sh
+make benchmark
+```
+
 ## Contributing
 
 Contributions are welcome! If you find a bug or want to add a new feature, please open an issue or submit a pull request.
