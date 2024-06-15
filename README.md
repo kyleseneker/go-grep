@@ -106,7 +106,7 @@ Autograph
 ```
 
 ```sh
-./go-grep na$ examples/rockbands.txt
+$ ./go-grep na$ examples/rockbands.txt
 Nirvana
 ```
 
